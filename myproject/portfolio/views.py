@@ -23,19 +23,16 @@ def home(request):
 
 def category(request, category_id):
     posts = Post.objects.filter(category_id=category_id).order_by('id')
+    category = Category.objects.get(id=category_id)
+    
     context = {
         'posts' : posts,
+        'categroy': categroy,
     }
-
-    if category_id == 2:
-        template = loader.get_template('base/projects.html')
-        return HttpResponse(template.render(context, request))
-   
-    else:
-        template = loader.get_template('base/coding.html')
-        return HttpResponse(template.render(context, request))
+    
+    template = loader.get_template('base/projects.html')
+    return HttpResponse(template.render(context, request))
   
-
 
 def projects(request):
     post = Post.objects.all
